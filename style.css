@@ -1,0 +1,84 @@
+header {
+  background-color: lightblue;
+}
+
+.title {
+  color: rgb(255, 255, 255);
+  display: inline;
+  font-size: 2.1rem;
+  padding-left: 40%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+}
+
+.playerSides {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  text-align: center;
+  background-color: lightblue;
+}
+
+.player {
+  display: inherit;
+  padding: 9%;
+  font-size: 1.5em;
+}
+
+.circle {
+  height: 15px;
+  width: 15px;
+  border: 1px solid #000;
+  border-radius: 100px;
+  margin: 2%;
+}
+
+.black-circle {
+  background-color: #000;
+}
+
+.yellow-circle {
+  background-color: rgb(235, 220, 14);
+}
+
+.reset {
+  text-align: center;
+  background-color: rgb(4, 6, 128);
+  color: #fff;
+  margin: 5%;
+  padding: 3%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.container h3 {
+  font-size: 18px;
+  color: rgb(4, 128, 10);
+  text-align: center;
+}
+
+.board {
+  background-color: rgb(72, 255, 0);
+  margin: 0 auto;
+  align-content: center;
+  border-radius: 5%;
+}
+
+.board button {
+  background-color: rgb(255, 255, 255);
+  border-radius: 60%;
+  border: 2px solid black;
+  margin: 2px;
+  width: 57px;
+  height: 57px;
+}
