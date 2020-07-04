@@ -1,23 +1,23 @@
 //Executed when user starts playing
 function playGame(){
-  if(isGameOver === false){
+  if(Game.currentState.isGameOver === false){
     //1. Fetch the selected column
     let col = $(event.target).parent("td").index();
     //2. Get empty row for that column - so coloured circle can be stacked
     let emptyRowNumber= getEmptyRowForSelectedColumn(col);
     if(emptyRowNumber !== null){
       //3. Update colour in the selected row, col
-      addColorToSelection(emptyRowNumber,col,activeColor);
+      addColorToSelection(emptyRowNumber,col,Game.currentState.activeColor);
       //4. Verify if win / draw condition is met after the current move
       let result = checkAll();
-      if (result === player1.index) {
-          $("h3").text(player1.name+ ", is Winner!! Reset game to start again.");
+      if (result === Game.config.player1.index) {
+          $("h3").text(Game.config.player1.name+ ", "+Game.messages.winMsg);
           toggleGameStatus();
-      } else if (result === player2.index) {
-          $("h3").text(player2.name+ ", is Winner!! Reset game to start again.");
+      } else if (result === Game.config.player2.index) {
+          $("h3").text(Game.config.player2.name+ ", "+Game.messages.winMsg);
           toggleGameStatus();
       } else if (result === 'draw') {
-          $("h3").text("Game Over!!  Reset game to start again");
+          $("h3").text(Game.messages.drawMsg);
           toggleGameStatus();
 
       } else{
@@ -30,33 +30,33 @@ function playGame(){
 
 //Change status of Game if win/draw
 function toggleGameStatus(){
-  isGameOver = !isGameOver;
+  Game.currentState.isGameOver = !(Game.currentState.isGameOver);
 }
 
 
 //Switch active player once circle selection is done
 function togglePlayer(){
-    if(activePlayer === player1.index){
-        activePlayer = player2.index;
-        activeName  = player2.name;
-        activeColor = player2.color;
+    if(Game.currentState.activePlayer === Game.config.player1.index){
+      Game.currentState.activePlayer = Game.config.player2.index;
+      Game.currentState.activeName  = Game.config.player2.name;
+      Game.currentState.activeColor = Game.config.player2.color;
     } else {
-        activePlayer = player1.index;
-        activeName  = player1.name;
-        activeColor = player1.color;
+      Game.currentState.activePlayer = Game.config.player1.index;
+      Game.currentState.activeName  = Game.config.player1.name;
+      Game.currentState.activeColor = Game.config.player1.color;
     }
-    $("h3").text(activeName+ ", it is your turn");
+    $("h3").text(Game.currentState.activeName+ ", "+Game.messages.playMsg);
 }
 
 //Return color of cell for given row and column
 function getCellColor(rowIndex,colIndex){
-    return (board.eq(rowIndex).find("td").eq(colIndex).find("button").css("background-color"));
+    return (Game.boardConfig.board.find("tr").eq(rowIndex).find("td").eq(colIndex).find("button").css("background-color"));
 }
 
 //Return empty row for selected column
 function getEmptyRowForSelectedColumn(colIndex){
     let circleColor;
-     for (let row = 5; row >= 0; row--) {
+     for (let row = (Game.boardConfig.boardRows-1); row >= 0; row--) {
          circleColor = getCellColor(row,colIndex);
         if (circleColor === "rgb(255, 255, 255)") {
           return row;
@@ -68,20 +68,21 @@ function getEmptyRowForSelectedColumn(colIndex){
 
 //Add color to the empty row for selected column by player
 function addColorToSelection(rowIndex,colIndex,color){
-    return (board.eq(rowIndex).find("td").eq(colIndex).find("button").css("background-color",color));
+    return (Game.boardConfig.board.find("tr").eq(rowIndex).find("td").eq(colIndex).find("button").css("background-color",color));
 }
 
 //Reset board and messages and set default player
 function resetGame(){
-  activePlayer = player1.index;
-  activeName  = player1.name;
-  activeColor = player1.color;
-  if (isGameOver === true){
+  Game.currentState.activePlayer = Game.config.player1.index;
+  Game.currentState.activeName  = Game.config.player1.name;
+  Game.currentState.activeColor = Game.config.player1.color;
+  if (Game.currentState.isGameOver === true){
     //Update the Game status if - Win/Draw is achieved
     toggleGameStatus();
   }
-  $("h3").text(activeName+ ", it is your turn");
-  return board
+  $("h3").text(Game.currentState.activeName+ ", "+Game.messages.playMsg);
+  return Game.boardConfig.board
+  .find("tr")
   .find("td")
   .find("button")
   .css("background-color", "rgb(255,255,255)");
