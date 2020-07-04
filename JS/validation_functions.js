@@ -12,7 +12,7 @@ function validateColorMatch(firstCell, secondCell, thirdCell, fourCell) {
 //check four consecutive circles are of same color vertically
 function checkVertical(){
   for (let col = 0; col < Game.boardConfig.boardCols; col++) {
-    for (let row = 0; row < Game.boardConfig.validationRowColLimit.verticalCheckRowLimit; row++) {
+    for (let row = 0; row < (Game.boardConfig.boardRows-3); row++) {
       if (
         validateColorMatch(
           getCellColor(row, col),
@@ -32,7 +32,7 @@ function checkVertical(){
 //check four consecutive circles are of same color diagonally toward right
 function checkDiagonalRight(){
   for (let row = 3; row < Game.boardConfig.boardRows; row++) {
-    for (let col = 0; col < Game.boardConfig.validationRowColLimit.diagonalRightCheckColLimit; col++) {
+    for (let col = 0; col < (Game.boardConfig.boardCols-3); col++) {
       if (
         validateColorMatch(
           getCellColor(row, col),
@@ -72,7 +72,7 @@ function checkDiagonalLeft(){
 //check four consecutive circles are of same color horizontally
 function checkHorizontal(){
   for (let row = 0; row < Game.boardConfig.boardRows; row++) {
-    for (let col = 0; col < Game.boardConfig.validationRowColLimit.horizontalCheckColLimit; col++) {
+    for (let col = 0; col < (Game.boardConfig.boardCols-3); col++) {
       if (
         validateColorMatch(
           getCellColor(row, col),

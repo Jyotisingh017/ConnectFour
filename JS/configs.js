@@ -19,12 +19,7 @@ Game.config = {
 Game.boardConfig = {
     board : $("table"),
     boardRows : 6,
-    boardCols : 7,
-    validationRowColLimit:{ //Update these when board row and col are changed. eg: if Row is increased by 1, then increase verticalCheckRowLimit also by one and same applies for col checks also.
-        verticalCheckRowLimit: 3,
-        diagonalRightCheckColLimit: 4,
-        horizontalCheckColLimit: 4
-    }
+    boardCols : 7
 };
 
 Game.currentState = {
