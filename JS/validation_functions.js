@@ -11,8 +11,8 @@ function validateColorMatch(firstCell, secondCell, thirdCell, fourCell) {
 
 //check four consecutive circles are of same color vertically
 function checkVertical(){
-  for (let col = 0; col < 7; col++) {
-    for (let row = 0; row < 3; row++) {
+  for (let col = 0; col < Game.boardConfig.boardCols; col++) {
+    for (let row = 0; row < (Game.boardConfig.boardRows-3); row++) {
       if (
         validateColorMatch(
           getCellColor(row, col),
@@ -21,7 +21,7 @@ function checkVertical(){
           getCellColor(row + 3, col)
         )
       ) {
-        return activePlayer;
+        return Game.result.win;
       } else {
         continue;
       }
@@ -31,8 +31,8 @@ function checkVertical(){
 
 //check four consecutive circles are of same color diagonally toward right
 function checkDiagonalRight(){
-  for (let row = 3; row < 6; row++) {
-    for (let col = 0; col < 4; col++) {
+  for (let row = 3; row < Game.boardConfig.boardRows; row++) {
+    for (let col = 0; col < (Game.boardConfig.boardCols-3); col++) {
       if (
         validateColorMatch(
           getCellColor(row, col),
@@ -41,7 +41,7 @@ function checkDiagonalRight(){
           getCellColor(row - 3, col + 3)
         )
       ) {
-        return activePlayer;
+        return Game.result.win;
       } else {
         continue;
       }
@@ -51,8 +51,8 @@ function checkDiagonalRight(){
 
 //check four consecutive circles are of same color diagonally toward left
 function checkDiagonalLeft(){
-  for (let row = 3; row < 6; row++) {
-    for (let col = 3; col < 7; col++) {
+  for (let row = 3; row < Game.boardConfig.boardRows; row++) {
+    for (let col = 3; col < Game.boardConfig.boardCols; col++) {
       if (
         validateColorMatch(
           getCellColor(row, col),
@@ -61,7 +61,7 @@ function checkDiagonalLeft(){
           getCellColor(row - 3, col - 3)
         )
       ) {
-        return activePlayer;
+        return Game.result.win;
       } else {
         continue;
       }
@@ -71,8 +71,8 @@ function checkDiagonalLeft(){
 
 //check four consecutive circles are of same color horizontally
 function checkHorizontal(){
-  for (let row = 0; row < 6; row++) {
-    for (let col = 0; col < 4; col++) {
+  for (let row = 0; row < Game.boardConfig.boardRows; row++) {
+    for (let col = 0; col < (Game.boardConfig.boardCols-3); col++) {
       if (
         validateColorMatch(
           getCellColor(row, col),
@@ -81,7 +81,7 @@ function checkHorizontal(){
           getCellColor(row, col + 3)
         )
       ) {
-        return activePlayer;
+        return Game.result.win;
       } else {
         continue;
       }
@@ -92,17 +92,17 @@ function checkHorizontal(){
 //check whether its draw between players
 function checkDraw(){
   let cellColor;
-  for (let col = 0; col < 7; col++) {
+  for (let col = 0; col < Game.boardConfig.boardCols; col++) {
     cellColor = getCellColor(0, col);
     
     if (cellColor === "rgb(255, 255, 255)") {
       return null;
     }
   } 
-  return "draw";
+  return Game.result.draw;
 }
 
 //Return whether four consecutive circles are of same color vertically,horizontally,diagonally or it's a draw.
-function checkAll(board) {
+function checkAll() {
    return checkVertical() || checkDiagonalRight() || checkDiagonalLeft() || checkHorizontal() || checkDraw();
 }
