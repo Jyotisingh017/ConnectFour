@@ -10,16 +10,12 @@ function playGame(){
       addColorToSelection(emptyRowNumber,col,Game.currentState.activeColor);
       //4. Verify if win / draw condition is met after the current move
       let result = checkAll();
-      if (result === Game.config.player1.index) {
-          $("h3").text(Game.config.player1.name+ ", "+Game.messages.winMsg);
+      if (result === Game.result.win) {
+          $("h3").text(Game.currentState.activeName+ ", "+Game.messages.winMsg);
           toggleGameStatus();
-      } else if (result === Game.config.player2.index) {
-          $("h3").text(Game.config.player2.name+ ", "+Game.messages.winMsg);
-          toggleGameStatus();
-      } else if (result === 'draw') {
+      } else if (result === Game.result.draw) {
           $("h3").text(Game.messages.drawMsg);
           toggleGameStatus();
-
       } else{
         //5. If no Win/Draw condition is met then toggle the player so other player can resume playing
         togglePlayer();

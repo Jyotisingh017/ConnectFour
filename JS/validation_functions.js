@@ -21,7 +21,7 @@ function checkVertical(){
           getCellColor(row + 3, col)
         )
       ) {
-        return Game.currentState.activePlayer;
+        return Game.result.win;
       } else {
         continue;
       }
@@ -41,7 +41,7 @@ function checkDiagonalRight(){
           getCellColor(row - 3, col + 3)
         )
       ) {
-        return Game.currentState.activePlayer;
+        return Game.result.win;
       } else {
         continue;
       }
@@ -61,7 +61,7 @@ function checkDiagonalLeft(){
           getCellColor(row - 3, col - 3)
         )
       ) {
-        return Game.currentState.activePlayer;
+        return Game.result.win;
       } else {
         continue;
       }
@@ -81,7 +81,7 @@ function checkHorizontal(){
           getCellColor(row, col + 3)
         )
       ) {
-        return Game.currentState.activePlayer;
+        return Game.result.win;
       } else {
         continue;
       }
@@ -99,7 +99,7 @@ function checkDraw(){
       return null;
     }
   } 
-  return "draw";
+  return Game.result.draw;
 }
 
 //Return whether four consecutive circles are of same color vertically,horizontally,diagonally or it's a draw.

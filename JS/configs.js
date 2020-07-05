@@ -2,6 +2,7 @@
 
 var Game = {};
 
+//player details
 Game.config = {
     player1 :{
         index: 1,
@@ -16,12 +17,14 @@ Game.config = {
     
 };
 
+//board rows and columns
 Game.boardConfig = {
     board : $("table"),
     boardRows : 6,
     boardCols : 7
 };
 
+//current player details and game state
 Game.currentState = {
     activePlayer : Game.config.player1.index,
     activeName  : Game.config.player1.name,
@@ -29,9 +32,16 @@ Game.currentState = {
     isGameOver : false
 }
 
+//User messages
 Game.messages = {
     winMsg : "is Winner!! Reset game to start again.",
     drawMsg : "Game Over!!  Reset game to start again.",
     playMsg: "it is your turn"
+}
+
+//Output of validation checks
+Game.result = { 
+    win : "win",
+    draw : "draw"
 }
 
